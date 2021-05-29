@@ -1,0 +1,8 @@
+{
+     "name": "innovation-bot",
+     "version": "1.0.0",
+     "description": "Yoshlar Innovatsiya Vazirligi Boshqarmasi uchun bot!",
+     "launch_scene": "home",
+     "author": "Mohirbek Odiljonov",
+     "license": "ISC"
+}

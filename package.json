@@ -1,0 +1,19 @@
+{
+  "name": "bot-maker",
+  "version": "1.0.0",
+  "description": "Best tool-kit for making awesome bots on telegram!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahercoder/bot-maker.git"
+  },
+  "author": "Mohirbek Odiljonov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mahercoder/bot-maker/issues"
+  },
+  "homepage": "https://github.com/mahercoder/bot-maker#readme"
+}

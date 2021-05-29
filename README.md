@@ -1,2 +1,3 @@
 # bot-maker
-Best tool-kit for making awesome bots on telegram!
+
+[scenario.json] - bu fayl orqali botning qanday sahnalardan tuzilganligi va o'z navbatida sahnalar qanday tugma va xabarlardan iboratligi to'liqligicha JSON formatda beriladi.

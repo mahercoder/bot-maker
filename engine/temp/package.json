@@ -1,0 +1,22 @@
+{
+  "name": "bot-template",
+  "version": "1.0.0",
+  "description": "Telegraf.js framework`i orqali barcha telegram bot`larni yasash uchun umumiy shablon!",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "nodemon index.js"
+  },
+  "author": "Mohirbek Odiljonov",
+  "license": "ISC",
+  "dependencies": {
+    "arraylist": "^0.1.0",
+    "dotenv": "^8.2.0",
+    "node-cache": "^5.1.2",
+    "node-cron": "^2.0.3",
+    "sequelize": "^5.21.13",
+    "sqlite3": "^5.0.0",
+    "telegraf": "^3.38.0",
+    "telegraf-i18n": "^6.6.0"
+  }
+}

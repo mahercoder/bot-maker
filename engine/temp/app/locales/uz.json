@@ -1,0 +1,14 @@
+{
+    "language": {
+        "name":   "O'zbek",
+        "flag": "🇺🇿",
+        "code": "uz"
+    },
+
+    "scenes": {
+        "greeting": {
+            "header": "Xush kelibsiz!",
+            "hi": "Salom ✋"
+        }
+    }
+}

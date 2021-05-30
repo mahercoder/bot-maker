@@ -4,5 +4,55 @@
      "description": "Yoshlar Innovatsiya Vazirligi Boshqarmasi uchun bot!",
      "launch_scene": "home",
      "author": "Mohirbek Odiljonov",
-     "license": "ISC"
+     "license": "ISC",
+     "scenes": [
+          {
+               "name": "home",
+               "caption": "This is a home scene.",
+               "extras": {
+                    "type": "image",
+                    "url": "https://t.me/cd_res/5"
+               },
+               "keyboard": [
+                    [{
+                         "text": "Tanlovlar",
+                         "callback_data": "home.contests"
+                    },{
+                         "text": "Loyiha yuborish",
+                         "callback_data": "home.send_projects"
+                    }],
+                    [{
+                         "text": "English for science",
+                         "callback_data": "home.english_for_science"
+                    },{
+                         "text": "G'oya berish",
+                         "callback_data": "home.give_idea"
+                    }],
+                    [{
+                         "text": "Biz bilan bog'lanish",
+                         "callback_data": "home.contact_us"
+                    },{
+                         "text": "Sozlash",
+                         "callback_data": "home.settings"
+                    }],
+                    {
+                         "text": "Bot haqida",
+                         "callback_data": "home.about",
+                         "enter_to": "about"
+                    }
+               ]
+          },
+          {
+               "name": "about",
+               "caption": "This is a about scene.",
+               "extras": null,
+               "keyboard": [
+                    {
+                         "text": "Orqaga",
+                         "callback_data": "about.back",
+                         "back_to": "home"
+                    }
+               ]
+          }
+     ]
 }

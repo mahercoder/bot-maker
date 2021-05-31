@@ -5,6 +5,7 @@
      "launch_scene": "home",
      "author": "Mohirbek Odiljonov",
      "license": "ISC",
+     "token": "1256186397:AAGQZCADa8UDoaSnehJEM2K49dblXQU8muU",
      "scenes": [
           {
                "name": "home",

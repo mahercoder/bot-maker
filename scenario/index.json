@@ -17,43 +17,51 @@
                "keyboard": [
                     [{
                          "text": "Tanlovlar",
-                         "callback_data": "home.contests"
+                         "callback_data": "home.contests",
+                         "inner_name": "contests"
                     },{
                          "text": "Loyiha yuborish",
-                         "callback_data": "home.send_projects"
+                         "callback_data": "home.send_projects",
+                         "inner_name": "send_projects"
                     }],
                     [{
                          "text": "English for science",
-                         "callback_data": "home.english_for_science"
+                         "callback_data": "home.english_for_science",
+                         "inner_name": "english_for_science"
                     },{
                          "text": "G'oya berish",
-                         "callback_data": "home.give_idea"
+                         "callback_data": "home.give_idea",
+                         "inner_name": "give_idea"
                     }],
                     [{
                          "text": "Biz bilan bog'lanish",
-                         "callback_data": "home.contact_us"
+                         "callback_data": "home.contact_us",
+                         "inner_name": "contact_us"
                     },{
                          "text": "Sozlash",
-                         "callback_data": "home.settings"
+                         "callback_data": "home.settings",
+                         "inner_name": "settings"
                     }],
                     {
                          "text": "Bot haqida",
                          "callback_data": "home.about",
+                         "inner_name": "about",
                          "enter_to": "about"
                     }
-               ]
+               ],
+               "childs": []
           },
           {
                "name": "about",
                "caption": "This is a about scene.",
-               "extras": null,
                "keyboard": [
                     {
                          "text": "Orqaga",
                          "callback_data": "about.back",
                          "back_to": "home"
                     }
-               ]
+               ],
+               "childs": []
           }
      ]
 }

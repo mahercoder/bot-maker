@@ -46,7 +46,7 @@
                          "text": "Bot haqida",
                          "callback_data": "home.about",
                          "inner_name": "about",
-                         "enter_to": "about"
+                         "go_to": "about"
                     }
                ]
           },
@@ -58,7 +58,7 @@
                          "text": "Orqaga",
                          "callback_data": "about.back",
                          "inner_name": "back",
-                         "back_to": "home"
+                         "go_to": "home"
                     }
                ]
           }

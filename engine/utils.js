@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const beautify = require('js-beautify').js
 
 function copyFileSync( source, target ) {
 
@@ -38,8 +39,57 @@ function copyFolderSync( source, target ) {
     }
 }
 
-function makeScenes(scenesPath, localesPath, scenes){
+function makeBeauty(filePath){
+    fs.readFile(filePath, 'utf8', function (err, data) {
+        if (err) throw err
+        const text = beautify(data, { 
+            indent_size: 2, 
+            space_in_empty_paren: true, 
+            indent_with_tabs: true, 
+            end_with_newline: true
+        })
+        fs.writeFileSync(filePath, text)
+    })
+}
 
+function generateKeyboard(scene){
+    let result = `const Extra=require('telegraf/extra');const callback = {`
+    let buttons = [].concat.apply([], scene.keyboard)
+
+    for(let i=0; i < buttons.length; i++){
+        result += `${buttons[i].inner_name}: '${buttons[i].callback_data}'`
+        if(i < buttons.length-1){
+            result += ','
+        }
+    }
+
+    result += '}';
+    result += `async function getKeyboard(ctx){let buttons = [];`
+
+    for(let i=0; i < scene.keyboard.length; i++) {
+        if(scene.keyboard[i].length){
+            let element = `[`
+            for(let n=0; n < scene.keyboard[i].length; n++){
+                element += `{
+                    text: ctx.i18n.t('scenes.${scene.name}.${scene.keyboard[i][n].inner_name}'),
+                    callback_data: callback.${scene.keyboard[i][n].inner_name}
+                }`
+                if(n < scene.keyboard[i].length-1){
+                    element += ','
+                }
+            }
+            element += `]`
+            result += `buttons.push(${element});`    
+        } else {
+            result += `buttons.push({text: ctx.i18n.t('scenes.${scene.name}.${scene.keyboard[i].inner_name}'),callback_data: callback.${scene.keyboard[i].inner_name}});`
+        }
+    }
+
+    result += `return Extra.HTML().markup((m) => m.inlineKeyboard(buttons));} module.exports = {callback,getKeyboard}`
+    return result
+}
+
+function makeScenes(scenesPath, localesPath, scenes){
 // Make locale file or apply if it exists
     let localeJson
     try{
@@ -57,7 +107,6 @@ function makeScenes(scenesPath, localesPath, scenes){
         }
     }
 
-    
     for(let i=0; i < scenes.length; i++){
         let scene = scenes[i]
         let currSceneJson = {}
@@ -80,30 +129,18 @@ function makeScenes(scenesPath, localesPath, scenes){
     }
 
     fs.writeFileSync(localesPath + '/uz.json', JSON.stringify(localeJson, null, '    '))
+// *************************************************
 
-    return localeJson
+// Make scene files
+    for(let i=0; i < scenes.length; i++){
+        let scene = scenes[i]
+        
+        const keyboard= generateKeyboard(scene)
+        fs.writeFileSync(scenesPath+'/'+scene.name + '/keyboard.js', keyboard)
+        makeBeauty(scenesPath+'/'+scene.name + '/keyboard.js')
+
+    }
 }
-
-// function makeScenes(scenesPath, localesPath, sceneList){
-//     for(let i=0; i < sceneList.length; i++){
-//         const log = makeScene(scenesPath, localesPath, sceneList[i])
-//         // console.log(log)
-//     }
-// }
-
-// const src_package = require(`${path_temp}/package.json`)
-// const stream_package = fs.createWriteStream(`${path_root}/package.json`)
-
-// src_package.name = scenario.name
-// src_package.version = scenario.version
-// src_package.description = scenario.description
-// src_package.author = scenario.author
-// src_package.license = scenario.license
-
-// stream_package.once('open', (fd) => {     
-//      stream_package.write(JSON.stringify(src_package, null, '    '))
-//      stream_package.end()
-// })
 
 module.exports = {
   copyFolderSync,

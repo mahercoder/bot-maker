@@ -90,15 +90,15 @@ function generateKeyboard(scene){
 }
 
 function generateBaseScene(scene){
-    let result = `const { BaseScene } = require('telegraf');const { callback, getKeyboard } = require('./keyboard');\nconst Handler = require('./handler');\nconst scene = new BaseScene('home').enter(async ctx => {`
+    let result = `const { BaseScene } = require('telegraf');const { callback, getKeyboard } = require('./keyboard');\nconst Handler = require('./handler');\nconst scene = new BaseScene('${scene.name}').enter(async ctx => {`
     if(scene.extras){
         switch(scene.extras.type){
             case 'image': {
-                result += `getKeyboard(ctx).then( async extra => { const url = ctx.i18n.t('scenes.${scene.name}.extras.url'); extra.caption = ctx.i18n.t('scenes.${scene.name}.header'); ctx.replyWithPhoto(url, extra)});})`
+                result += `getKeyboard(ctx).then( async extra => { const url = ctx.i18n.t('scenes.${scene.name}.extras.url'); extra.caption = ctx.i18n.t('scenes.${scene.name}.header'); ctx.replyWithPhoto(url, extra)})`
                 break;
             }
             case 'video': {
-                result += `getKeyboard(ctx).then( async extra => {const url = ctx.i18n.t('scenes.${scene.name}.extras.url'); extra.caption = ctx.i18n.t('scenes.${scene.name}.header'); ctx.replyWithVideo(url, extra)});})`
+                result += `getKeyboard(ctx).then( async extra => {const url = ctx.i18n.t('scenes.${scene.name}.extras.url'); extra.caption = ctx.i18n.t('scenes.${scene.name}.header'); ctx.replyWithVideo(url, extra)})`
                 break;
             }
         }
@@ -107,7 +107,7 @@ function generateBaseScene(scene){
         result += `getKeyboard(ctx).then( async keyboard => {const text = ctx.i18n.t('scenes.${scene.name}.header');ctx.reply(text, keyboard);})`
     }
 
-    result += `.action(/.+/, async ctx => {const action = ctx.callbackQuery.data.split('--')[0];switch(action){`
+    result += `}).action(/.+/, async ctx => {const action = ctx.callbackQuery.data.split('--')[0];switch(action){`
     
     let buttons = [].concat.apply([], scene.keyboard)
     for(let i=0; i < buttons.length; i++){

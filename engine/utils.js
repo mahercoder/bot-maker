@@ -104,7 +104,7 @@ function generateBaseScene(scene){
         }
 
     } else {
-        result += `getKeyboard(ctx).then( async keyboard => {const text = ctx.i18n.t('scenes.${scene.name}.header');ctx.reply(text, keyboard);});`
+        result += `getKeyboard(ctx).then( async keyboard => {const text = ctx.i18n.t('scenes.${scene.name}.header');ctx.reply(text, keyboard);})`
     }
 
     result += `.action(/.+/, async ctx => {const action = ctx.callbackQuery.data.split('--')[0];switch(action){`

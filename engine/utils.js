@@ -81,7 +81,7 @@ function generateKeyboard(scene){
             element += `]`
             result += `buttons.push(${element});`    
         } else {
-            result += `buttons.push({text: ctx.i18n.t('scenes.${scene.name}.${scene.keyboard[i].inner_name}'),callback_data: callback.${scene.keyboard[i].inner_name}});`
+            result += `buttons.push([{text: ctx.i18n.t('scenes.${scene.name}.${scene.keyboard[i].inner_name}'),callback_data: callback.${scene.keyboard[i].inner_name}}]);`
         }
     }
 

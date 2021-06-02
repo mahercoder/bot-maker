@@ -36,7 +36,8 @@
                     [{
                          "text": "Biz bilan bog'lanish",
                          "callback_data": "home.contact_us",
-                         "inner_name": "contact_us"
+                         "inner_name": "contact_us",
+                         "go_to": "contact_us"
                     },{
                          "text": "Sozlash",
                          "callback_data": "home.settings",

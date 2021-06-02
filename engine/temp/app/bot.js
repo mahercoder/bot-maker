@@ -1,5 +1,5 @@
 const { Telegraf } = require('telegraf')
-const { setupMiddlewares, setupCommands, setupUpdates } = require('./components')
+const { setupMiddlewares, setupCommands, setupUpdates } = require('./actions')
 
 const bot = new Telegraf(process.env.TOKEN)
 

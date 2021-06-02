@@ -142,6 +142,22 @@ function generateHandler(scene){
     return result
 }
 
+function makeBaseIndex(scenes){
+    let result = `module.exports = {`
+
+    for(let i=0; i < scenes.length; i++){
+        const scene = scenes[i]
+        result += `${scene.name}: require('./${scene.name}')`
+        if(i < scenes.length-1){
+            result += ','
+        }
+    }
+
+    result += `}`
+
+    return result
+}
+
 function makeScenes(scenesPath, localesPath, scenes){
 // Make locale file or apply if it exists
     let localeJson
@@ -200,6 +216,10 @@ function makeScenes(scenesPath, localesPath, scenes){
         fs.writeFileSync(scenesPath+'/'+scene.name + '/index.js', index)
         makeBeauty(scenesPath+'/'+scene.name + '/index.js')
     }
+
+    const baseIndex = makeBaseIndex(scenes)
+    fs.writeFileSync(scenesPath+'/' + '/index.js', baseIndex)
+    makeBeauty(scenesPath+'/' + '/index.js')
 }
 
 module.exports = {

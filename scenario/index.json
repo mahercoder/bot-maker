@@ -1,5 +1,5 @@
 {
-     "name": "innovation-bot",
+     "name": "less-innovation-bot",
      "version": "1.0.0",
      "description": "Yoshlar Innovatsiya Vazirligi Boshqarmasi uchun bot!",
      "launch_scene": "home",
@@ -47,6 +47,18 @@
                          "callback_data": "home.about",
                          "inner_name": "about",
                          "go_to": "about"
+                    }
+               ]
+          },
+          {
+               "name": "contact_us",
+               "caption": "This is a contact us scene.",
+               "keyboard": [
+                    {
+                         "text": "Orqaga",
+                         "callback_data": "contact_us.back",
+                         "inner_name": "back",
+                         "go_to": "home"
                     }
                ]
           },

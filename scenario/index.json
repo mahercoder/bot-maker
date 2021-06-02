@@ -48,8 +48,7 @@
                          "inner_name": "about",
                          "enter_to": "about"
                     }
-               ],
-               "childs": []
+               ]
           },
           {
                "name": "about",
@@ -58,10 +57,11 @@
                     {
                          "text": "Orqaga",
                          "callback_data": "about.back",
+                         "inner_name": "back",
                          "back_to": "home"
                     }
-               ],
-               "childs": []
+               ]
           }
      ]
 }
+

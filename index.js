@@ -1,12 +1,14 @@
-let mod = {};
+require('./engine')
 
-try{
-     mod = require('./scenarios')
-} catch(err) {
-     // console.log(err.code === `MODULE_NOT_FOUND`)
-}
+// let mod = {};
 
-console.log(mod)
+// try{
+//      mod = require('./scenarios')
+// } catch(err) {
+//      // console.log(err.code === `MODULE_NOT_FOUND`)
+// }
+
+// console.log(mod)
 
 // const scenario = require('./scenario')
 // scenario.name = "bot-temp"

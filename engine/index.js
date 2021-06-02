@@ -26,8 +26,7 @@ const scenario = require('../scenario')
 // ./root/app/scenes
      const path_app_scenes = `${path_app}/scenes`
      fs.mkdirSync(path_app_scenes)
-     Utils.makeScene(`${path_app}/scenes`, `${path_app}/locales`, scenario.scenes[0])
-     // Utils.makeScene(`${path_app}/scenes`, `${path_app}/locales`, scenario.scenes[1])
+     Utils.makeScenes(`${path_app}/scenes`, `${path_app}/locales`, scenario.scenes)
 
 // ./root/app/utils
      Utils.copyFolderSync(path_temp+'/app/utils', path_app)

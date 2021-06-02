@@ -38,13 +38,9 @@ function copyFolderSync( source, target ) {
     }
 }
 
-function makeScene(scenesPath, localesPath, scene){
-    
-// Make a folder
-    fs.mkdirSync(scenesPath+'/'+scene.name)
-    
+function makeScenes(scenesPath, localesPath, scenes){
+
 // Make locale file or apply if it exists
-    // const stream_locale = fs.createWriteStream(localesPath + '/uz.json')
     let localeJson
     try{
         localeJson = require(localesPath + '/uz.json')
@@ -61,40 +57,39 @@ function makeScene(scenesPath, localesPath, scene){
         }
     }
 
-    let currSceneJson = {}
-
-    currSceneJson.header = scene.caption
-    if(scene.extras){
-        currSceneJson.extras = scene.extras
-    }
-
-    localeJson.scenes[scene.name] = currSceneJson
-
-    // stream_locale.once('open', (fd) => {     
-    //     stream_locale.write(JSON.stringify(localeJson, null, '    '))
-    //     stream_locale.end()
-    // })
-
-    fs.writeFileSync(localesPath + '/uz.json', JSON.stringify(localeJson, null, '    '))
     
-    // fs.appendFile(localesPath + '/uz.json', JSON.stringify(localeJson, null, '    ') , (err) => {
-    //     if (err) throw err;
-    //     console.log('The "data to append" was appended to file!')
-    // })
+    for(let i=0; i < scenes.length; i++){
+        let scene = scenes[i]
+        let currSceneJson = {}
+        
+        // Make a folder for each scene
+        fs.mkdirSync(scenesPath+'/'+scene.name)
 
-    let buttons = [].concat.apply([], scene.keyboard)
-
-    for(let i=0; i < buttons.length; i++){
-        currSceneJson[buttons[i].inner_name]=buttons[i].text
+        currSceneJson.header = scene.caption
+        if(scene.extras){
+            currSceneJson.extras = scene.extras
+        }
+    
+        let buttons = [].concat.apply([], scene.keyboard)
+    
+        for(let i=0; i < buttons.length; i++){
+            currSceneJson[buttons[i].inner_name]=buttons[i].text
+        }
+    
+        localeJson.scenes[scene.name] = currSceneJson
     }
 
     fs.writeFileSync(localesPath + '/uz.json', JSON.stringify(localeJson, null, '    '))
 
-    // fs.appendFile(localesPath + '/uz.json', JSON.stringify(localeJson, null, '    ') , (err) => {
-    //     if (err) throw err;
-    //     console.log('The "data to append" was appended to file!')
-    // })
+    return localeJson
 }
+
+// function makeScenes(scenesPath, localesPath, sceneList){
+//     for(let i=0; i < sceneList.length; i++){
+//         const log = makeScene(scenesPath, localesPath, sceneList[i])
+//         // console.log(log)
+//     }
+// }
 
 // const src_package = require(`${path_temp}/package.json`)
 // const stream_package = fs.createWriteStream(`${path_root}/package.json`)
@@ -112,5 +107,5 @@ function makeScene(scenesPath, localesPath, scene){
 
 module.exports = {
   copyFolderSync,
-  makeScene
+  makeScenes
 }

@@ -36,6 +36,7 @@ const scenario = require('../scenario')
 /************** MAKING MUST HAVE FILES ******************************/
 
 /*** ./root ***/
+
      /*** ./root/index.js ***/
           fs.copyFileSync(`${path_temp}/index.js`, `${path_root}/index.js`)
 
@@ -62,11 +63,17 @@ const scenario = require('../scenario')
           })
 /**************/
 /*** ./app ***/
-     // ./actions/commands/start.js
 
-     const start = `module.exports = { name: 'start', action: async function(ctx){ctx.scene.enter('${scenario.launch_scene}');}}`
-     fs.writeFileSync(`${path_app}/actions/commands/start.js`, start)
-     Utils.makeBeauty(`${path_app}/actions/commands/start.js`)
+     // /index.js
+          Utils.copyFileSync(path_temp+'/app/index.js', path_app + '/index.js')   
+
+     // /bot.js
+          Utils.copyFileSync(path_temp+'/app/bot.js', path_app + '/bot.js')     
+
+     // /actions/commands/start.js
+          const start = `module.exports = { name: 'start', action: async function(ctx){ctx.scene.enter('${scenario.launch_scene}');}}`
+          fs.writeFileSync(`${path_app}/actions/commands/start.js`, start)
+          Utils.makeBeauty(`${path_app}/actions/commands/start.js`)
 
 /*************/
 

@@ -204,5 +204,6 @@ function makeScenes(scenesPath, localesPath, scenes){
 
 module.exports = {
   copyFolderSync,
+  makeBeauty,
   makeScenes
 }

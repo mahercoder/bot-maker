@@ -62,6 +62,11 @@ const scenario = require('../scenario')
           })
 /**************/
 /*** ./app ***/
+     // ./actions/commands/start.js
+
+     const start = `module.exports = { name: 'start', action: async function(ctx){ctx.scene.enter('${scenario.launch_scene}');}}`
+     fs.writeFileSync(`${path_app}/actions/commands/start.js`, start)
+     Utils.makeBeauty(`${path_app}/actions/commands/start.js`)
 
 /*************/
 

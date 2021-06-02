@@ -6,7 +6,7 @@ Working principles: [scenario] -> [engine] -> [ products {[app_name_1], [app_nam
      scenes: {
           backable: false,
           extras: { //default it equals to null!!!
-               type: ['image', 'file', 'gif', 'video']
+               type: ['image', 'video']
                url: 'https://some.url.here'
           }
      }

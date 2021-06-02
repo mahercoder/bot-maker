@@ -89,6 +89,59 @@ function generateKeyboard(scene){
     return result
 }
 
+function generateBaseScene(scene){
+    let result = `const { BaseScene } = require('telegraf');const { callback, getKeyboard } = require('./keyboard');\nconst Handler = require('./handler');\nconst scene = new BaseScene('home').enter(async ctx => {`
+    if(scene.extras){
+        switch(scene.extras.type){
+            case 'image': {
+                result += `getKeyboard(ctx).then( async extra => { const url = ctx.i18n.t('scenes.${scene.name}.extras.url'); extra.caption = ctx.i18n.t('scenes.${scene.name}.header'); ctx.replyWithPhoto(url, extra)});})`
+                break;
+            }
+            case 'video': {
+                result += `getKeyboard(ctx).then( async extra => {const url = ctx.i18n.t('scenes.${scene.name}.extras.url'); extra.caption = ctx.i18n.t('scenes.${scene.name}.header'); ctx.replyWithVideo(url, extra)});})`
+                break;
+            }
+        }
+
+    } else {
+        result += `getKeyboard(ctx).then( async keyboard => {const text = ctx.i18n.t('scenes.${scene.name}.header');ctx.reply(text, keyboard);});`
+    }
+
+    result += `.action(/.+/, async ctx => {const action = ctx.callbackQuery.data.split('--')[0];switch(action){`
+    
+    let buttons = [].concat.apply([], scene.keyboard)
+    for(let i=0; i < buttons.length; i++){
+        result += `case callback.${buttons[i].inner_name}: {Handler.${buttons[i].inner_name}(ctx);break;}`
+    }
+
+    result += `}});module.exports = scene`
+
+    return result
+}
+
+function generateHandler(scene){
+    let result = `let handler = {};`
+    
+    let buttons = [].concat.apply([], scene.keyboard)
+
+    for(let i=0; i < buttons.length; i++){
+        if(buttons[i].go_to){
+            result += `handler.${buttons[i].inner_name} = function(ctx){
+                ctx.deleteMessage();
+                ctx.scene.enter('${buttons[i].go_to}');
+            }`            
+        } else {
+            result += `handler.${buttons[i].inner_name} = function(ctx){
+    
+            }`
+        }
+    }
+
+    result += `module.exports = handler`
+    
+    return result
+}
+
 function makeScenes(scenesPath, localesPath, scenes){
 // Make locale file or apply if it exists
     let localeJson
@@ -135,10 +188,17 @@ function makeScenes(scenesPath, localesPath, scenes){
     for(let i=0; i < scenes.length; i++){
         let scene = scenes[i]
         
-        const keyboard= generateKeyboard(scene)
+        const keyboard = generateKeyboard(scene)
         fs.writeFileSync(scenesPath+'/'+scene.name + '/keyboard.js', keyboard)
         makeBeauty(scenesPath+'/'+scene.name + '/keyboard.js')
 
+        const handler = generateHandler(scene)
+        fs.writeFileSync(scenesPath+'/'+scene.name + '/handler.js', handler)
+        makeBeauty(scenesPath+'/'+scene.name + '/handler.js')
+        
+        const index = generateBaseScene(scene)
+        fs.writeFileSync(scenesPath+'/'+scene.name + '/index.js', index)
+        makeBeauty(scenesPath+'/'+scene.name + '/index.js')
     }
 }
 

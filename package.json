@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mahercoder/bot-maker/issues"
   },
-  "homepage": "https://github.com/mahercoder/bot-maker#readme"
+  "homepage": "https://github.com/mahercoder/bot-maker#readme",
+  "dependencies": {
+    "js-beautify": "^1.10.1-rc2"
+  }
 }

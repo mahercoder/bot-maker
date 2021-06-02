@@ -1,4 +1,15 @@
-require('./engine')
+// require('./engine')
+
+var beautify = require('js-beautify').js,
+    fs = require('fs');
+
+fs.readFile('test.js', 'utf8', function (err, data) {
+    if (err) {
+        throw err;
+    }
+    const text = beautify(data, { indent_size: 2, space_in_empty_paren: true, indent_with_tabs: true, end_with_newline: true})
+    fs.writeFileSync('test.js', text)
+});
 
 // let mod = {};
 

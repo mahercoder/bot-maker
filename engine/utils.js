@@ -125,6 +125,10 @@ function generateHandler(scene){
     let buttons = [].concat.apply([], scene.keyboard)
 
     for(let i=0; i < buttons.length; i++){
+        result += `
+        
+        // [${buttons[i].text}]
+        `
         if(buttons[i].go_to){
             result += `handler.${buttons[i].inner_name} = function(ctx){
                 ctx.deleteMessage();
